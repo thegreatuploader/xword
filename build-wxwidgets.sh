@@ -3,8 +3,8 @@
 
 set -e
 
-WX_VERSION=$1
-CONFIGURATION=$2
+WX_VERSION=3.0.0
+CONFIGURATION=Release
 
 if [[ -z "$WX_VERSION" ]]; then
   echo "First argument must be set to the wxWindows version"
