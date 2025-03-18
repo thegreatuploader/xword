@@ -3,7 +3,7 @@
 
 set -e
 
-LUAJIT_VERSION=2.05
+LUAJIT_VERSION=2.0.5
 
 if [[ -z "$LUAJIT_VERSION" ]]; then
   echo "First argument must be set to the LuaJIT version"
