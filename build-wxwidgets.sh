@@ -32,9 +32,6 @@ WX_MAKE_FLAGS="SHARED=0"
 
 WX_MAKE_FLAGS="$WX_MAKE_FLAGS BUILD=release"
 
-"Building wxWidgets version $WX_VERSION for configuration: $CONFIGURATION"
-mkdir -p $INSTALL_PATH
-
 BUILD_COMMAND="sed -e 's/WXWIN_COMPATIBILITY_2_8 0/WXWIN_COMPATIBILITY_2_8 1/' -i include/wx/msw/setup.h"
 BUILD_COMMAND="$BUILD_COMMAND && cd build/msw && nmake.exe -f makefile.vc $WX_MAKE_FLAGS"
 BUILD_COMMAND="$BUILD_COMMAND && cp -a ../../lib ../../include $INSTALL_PATH"
