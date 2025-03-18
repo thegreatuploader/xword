@@ -30,28 +30,14 @@ WX_CONFIGURE_FLAGS="\
   LDFLAGS=-stdlib=libc++"
 WX_MAKE_FLAGS="SHARED=0"
 
-if [[ "$CONFIGURATION" == "Debug" ]]; then
-  WX_CONFIGURE_FLAGS="$WX_CONFIGURE_FLAGS --enable-debug"
-  WX_MAKE_FLAGS="$WX_MAKE_FLAGS BUILD=debug"
-elif [[ "$CONFIGURATION" == "Release" ]]; then
-  WX_MAKE_FLAGS="$WX_MAKE_FLAGS BUILD=release"
-else
-  echo "Unsupported configuration: $CONFIGURATION"
-  echo "Please use one of Debug or Release"
-  exit 1
-fi
-echo "Building wxWidgets version $WX_VERSION for configuration: $CONFIGURATION"
+WX_MAKE_FLAGS="$WX_MAKE_FLAGS BUILD=release"
+
+"Building wxWidgets version $WX_VERSION for configuration: $CONFIGURATION"
 mkdir -p $INSTALL_PATH
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  # Mac OS X
-  BUILD_COMMAND="./configure --prefix=$INSTALL_PATH $WX_CONFIGURE_FLAGS && make -j 4 && make install"
-else
-  # Windows
-  BUILD_COMMAND="sed -e 's/WXWIN_COMPATIBILITY_2_8 0/WXWIN_COMPATIBILITY_2_8 1/' -i include/wx/msw/setup.h"
-  BUILD_COMMAND="$BUILD_COMMAND && cd build/msw && nmake.exe -f makefile.vc $WX_MAKE_FLAGS"
-  BUILD_COMMAND="$BUILD_COMMAND && cp -a ../../lib ../../include $INSTALL_PATH"
-fi
+BUILD_COMMAND="sed -e 's/WXWIN_COMPATIBILITY_2_8 0/WXWIN_COMPATIBILITY_2_8 1/' -i include/wx/msw/setup.h"
+BUILD_COMMAND="$BUILD_COMMAND && cd build/msw && nmake.exe -f makefile.vc $WX_MAKE_FLAGS"
+BUILD_COMMAND="$BUILD_COMMAND && cp -a ../../lib ../../include $INSTALL_PATH"
 
 # Check to see if the cache directory is empty
 if [ ! -d "$INSTALL_PATH/lib" ]; then
