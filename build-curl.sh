@@ -3,7 +3,7 @@
 
 set -e
 
-CURL_VERSION=$1
+CURL_VERSION=7.69.0
 
 if [[ -z "$CURL_VERSION" ]]; then
   echo "First argument must be set to the curl version"
