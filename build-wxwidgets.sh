@@ -3,7 +3,7 @@
 
 set -e
 
-WX_VERSION=3.0.0
+WX_VERSION=3.1.3
 CONFIGURATION=Release
 
 if [[ -z "$WX_VERSION" ]]; then
